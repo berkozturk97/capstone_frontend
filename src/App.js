@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import './App.css';
+import NavigationBar from './components/navbar/navbar.jsx';
+import HomePage from './Pages/HomePage';
+import { createBrowserHistory } from 'history';
+import Dashboard from './Pages/AdminPage/Dashboard';
+
 
 function App() {
   return (
+    <Router history={history}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavigationBar />
+      <Switch>
+        <Route path='/' exact component={HomePage} />
+        <Route path='/admin' exact component={Dashboard} />
+      </Switch>
     </div>
+  </Router>
   );
 }
 
+
+export const history = createBrowserHistory({ forceRefresh: true })
 export default App;
