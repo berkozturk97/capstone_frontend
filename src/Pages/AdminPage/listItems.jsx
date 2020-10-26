@@ -9,38 +9,44 @@ import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import { Global } from '../../Global';
+import { Divider } from '@material-ui/core';
 
 export const mainListItems = (
   <div>
     <ListItem button>
       <ListItemIcon>
-        <DashboardIcon />
+        <DashboardIcon style={{color:Global.color.green}} />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Dashboard" style={{color:Global.color.grey}} />
     </ListItem>
+    <Divider />
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
+        <ShoppingCartIcon style={{color:Global.color.green}}/>
+      </ListItemIcon >
+      <ListItemText primary="Orders" style={{color:Global.color.grey}} />
     </ListItem>
+    <Divider />
     <ListItem button>
       <ListItemIcon>
-        <PeopleIcon />
+        <PeopleIcon style={{color:Global.color.green}} />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <ListItemText primary="Customers" style={{color:Global.color.grey}} />
     </ListItem>
+    <Divider />
     <ListItem button>
       <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
+        <BarChartIcon style={{color:Global.color.green}} />
+      </ListItemIcon >
+      <ListItemText primary="Reports" style={{color:Global.color.grey}} />
     </ListItem>
+    <Divider />
     <ListItem button>
       <ListItemIcon>
-        <LayersIcon />
+        <LayersIcon style={{color:Global.color.green}} />
       </ListItemIcon>
-      <ListItemText primary="Integrations" />
+      <ListItemText primary="Integrations" style={{color:Global.color.grey}} />
     </ListItem>
   </div>
 );

@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import { getLog } from '../../API/api';
+import { Global } from '../../Global';
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -30,7 +31,7 @@ export default function Orders() {
   const [rows, setRows] = useState([]);
   useEffect(() => {
     getLogsToPanel();
-  },[])
+  }, [])
   const getLogsToPanel = async () => {
     let deneme = [];
     let responseData = await getLog();
@@ -38,8 +39,8 @@ export default function Orders() {
       console.log(responseData)
       responseData.map((item, index) => {
         let date = new Date(item.createdAt)
-        deneme.push(createData(index,date.toLocaleString(), item.user.fullName,
-          item.rfid,item.doorid,item.isOpen.toString()));
+        deneme.push(createData(index, date.toLocaleString(), item.user.fullName,
+          item.rfid, item.doorid, item.isOpen.toString()));
       });
     }
     setRows(deneme);
@@ -51,23 +52,25 @@ export default function Orders() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>RFID</TableCell>
-            <TableCell>DoorId</TableCell>
-            <TableCell align="right">isOpen</TableCell>
+            <TableCell style={{ color: Global.color.grey }}>Date</TableCell>
+            <TableCell style={{ color: Global.color.grey }}>Name</TableCell>
+            <TableCell style={{ color: Global.color.grey }}>RFID</TableCell>
+            <TableCell style={{ color: Global.color.grey }}>DoorId</TableCell>
+            <TableCell style={{ color: Global.color.grey }} align="right">isOpen</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row) =>{
+            console.log(row.amount)
+            return (
             <TableRow key={row.date}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+              <TableCell style={{ color: Global.color.white }}>{row.date}</TableCell>
+              <TableCell style={{ color: Global.color.white }}>{row.name}</TableCell>
+              <TableCell style={{ color: Global.color.white }}>{row.shipTo}</TableCell>
+              <TableCell style={{ color: Global.color.white }}>{row.paymentMethod}</TableCell>
+              <TableCell style={{ color: row.amount === "true" ?  Global.color.green : Global.color.red }} align="right">{row.amount}</TableCell>
             </TableRow>
-          ))}
+          )})}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
