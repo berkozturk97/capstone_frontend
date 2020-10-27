@@ -1,0 +1,165 @@
+.MainDiv {
+    visibility: visible;
+    position: fixed;
+    right: 0;
+    bottom:0;
+    margin: 10px;
+    overflow: hidden;
+    z-index: 3;
+}
+.ShoppingList{
+    padding: 10px;
+    height: 425px;
+    overflow-y: scroll;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.Image {
+    height: 50px;
+    width: 50px;
+}
+.MinusIcon{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    right: 0px;
+
+}
+.CartItem {
+    height: 50px;
+    width: 260px;
+    flex-direction: row;
+    display: flex;
+    margin: 5px;
+    border: solid 0.5px white;
+    border-bottom: 0.5;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    align-items: center;
+}
+.CartName{
+    color: #1db954;
+    font-size: 15px;
+    margin-left: 5px;
+    margin-top: 12px;
+}
+.ShoppingCart{
+    width: 300px;
+    height: 500px;
+    display: flex;
+    right: 0%;
+    bottom:0;
+    margin-bottom: 80px;
+    position: fixed;
+    flex: 1;
+    background: rgb(236, 212, 76);
+    border-radius: 7px;
+    z-index: 546;
+    flex-direction: column;
+    
+    
+}
+.Checkout{
+    float: inline-end;
+}
+.TotalPriceText{
+    font-weight: bold;
+    margin-left: 10px;
+    color: #FFD10D;
+}
+.TotalPriceDiv{
+    position: relative;
+    justify-content: space-between;
+    z-index: 151515;
+    background: #1db954;
+    width: 300px;
+    height: 30px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    flex-direction: row;
+    display: flex;
+}
+.ItemCount{
+    color: #1db954;
+    font-size: 15px;
+}
+.BoxDiv{
+    padding: 10px;
+    background: #FFD10D;
+    border-radius: 105454545px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+}
+.BasketTitle{
+    margin: 0px;
+    background: #1db954;
+    font-size: 24px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    padding: 10px;
+    color: #FFD10D;
+}
+.CheckOut {
+    color: #1db954;
+    border-radius: 3px;
+}
+.Alert {
+    /* top: 0; */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0, 0.5);
+  }
+  .Alert_inner {
+    border-radius: 10px;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 250px;
+    width: 500px;
+    margin-bottom: 200px;
+    background: white;
+  }
+  .AlertButton{
+    border-radius: 5px;
+    background-color: #FFD10D;
+    color: #1db954;
+    font-weight: bold;
+  }
+  .AlertName{
+    color: #1db954;
+    text-align: center;
+}
+  .AlertButton{
+    position: relative;
+    margin: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #1db954;
+    color: ivory;
+  }
+  .AlertSubType{
+    color: black;
+}
+
+  @media screen and (max-width: 750px){
+    .Alert_inner {
+        left: 0%;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+        z-index: 10;
+      }
+    .AlertButton{
+        position: relative;
+        top: 10%;
+    }
+  }

@@ -7,12 +7,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
-import { getLog } from '../../API/api';
+import { getAllDoor, getLog } from '../../API/api';
 import { Global } from '../../Global';
+import LogDetailModal from '../../components/logdetailmodal/LogDetailModal';
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+function createData(index, name, shipTo, paymentMethod, seeMore) {
+  return { index, name, shipTo, paymentMethod, seeMore };
 }
 
 function preventDefault(event) {
@@ -29,55 +30,71 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Orders() {
   const [rows, setRows] = useState([]);
+  const [popUp, setPopUp] = useState(false);
+  const [selectedItem, setSelectedItem] = useState([]);
   useEffect(() => {
     getLogsToPanel();
   }, [])
+
+
   const getLogsToPanel = async () => {
     let deneme = [];
-    let responseData = await getLog();
+    let responseData = await getAllDoor();
     if (responseData !== null) {
       console.log(responseData)
       responseData.map((item, index) => {
         let date = new Date(item.createdAt)
-        deneme.push(createData(index, date.toLocaleString(), item.user.fullName,
-          item.rfid, item.doorid, item.isOpen.toString()));
+        deneme.push(createData(index, item.doorName,
+          item.doorId, item._id, seeMore(item._id)));
       });
     }
     setRows(deneme);
   }
+  const seeMore = (doorId) => {
+    return (
+      <div onClick={() => {
+        setSelectedItem(doorId)
+        setPopUp(true)
+        console.log("selectedItem" + doorId)
+      }}>
+        <a style={{ color: '#3949AB', textDecoration: "underline", cursor: 'pointer' }}>See Detail</a>
+      </div>
+    )
+  }
   const classes = useStyles();
   return (
     <React.Fragment>
+      <LogDetailModal
+        openAlert={popUp}
+        closePopUp={() => setPopUp(false)}
+        selectedItem={selectedItem} />
       <Title>Recent Orders</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
-            <TableCell style={{ color: Global.color.grey }}>Date</TableCell>
+            <TableCell style={{ color: Global.color.grey }}>Number</TableCell>
             <TableCell style={{ color: Global.color.grey }}>Name</TableCell>
-            <TableCell style={{ color: Global.color.grey }}>RFID</TableCell>
-            <TableCell style={{ color: Global.color.grey }}>DoorId</TableCell>
-            <TableCell style={{ color: Global.color.grey }} align="right">isOpen</TableCell>
+            <TableCell style={{ color: Global.color.grey }}>Door Code</TableCell>
+            <TableCell style={{ color: Global.color.grey }}>Door Id</TableCell>
+            <TableCell style={{ color: Global.color.grey }} align="right">Detail</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) =>{
+          {rows.map((row) => {
             console.log(row.amount)
             return (
-            <TableRow key={row.date}>
-              <TableCell style={{ color: Global.color.white }}>{row.date}</TableCell>
-              <TableCell style={{ color: Global.color.white }}>{row.name}</TableCell>
-              <TableCell style={{ color: Global.color.white }}>{row.shipTo}</TableCell>
-              <TableCell style={{ color: Global.color.white }}>{row.paymentMethod}</TableCell>
-              <TableCell style={{ color: row.amount === "true" ?  Global.color.green : Global.color.red }} align="right">{row.amount}</TableCell>
-            </TableRow>
-          )})}
+              <TableRow key={row.date}>
+                <TableCell style={{ color: Global.color.white }}>{row.index + 1}</TableCell>
+                <TableCell style={{ color: Global.color.white }}>{row.name}</TableCell>
+                <TableCell style={{ color: Global.color.white }}>{row.shipTo}</TableCell>
+                <TableCell style={{ color: Global.color.white }}>{row.paymentMethod}</TableCell>
+                <TableCell align="right">{row.seeMore}</TableCell>
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
+      <div className={classes.seeMore}/>
     </React.Fragment>
   );
 }

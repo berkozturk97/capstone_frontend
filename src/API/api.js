@@ -12,32 +12,10 @@ export const getLog = () => {
     });
 };
 
-export const getCategoryProducts = ({body=null}) => {
+export const getAllDoor = () => {
     return new Promise((resolve, reject) => {
-        let REQUEST_URL = "http://goturapp.herokuapp.com/enroll/getCategoryItems";
-        axios.post(REQUEST_URL,body)
-            .then((response) => {
-                resolve(response.data)
-            }).catch((err) => {
-                reject(null);
-            })
-    });
-};
-export const getSubTypes = ({body=null}) => {
-    return new Promise((resolve, reject) => {
-        let REQUEST_URL = "http://goturapp.herokuapp.com/enroll/getSubTypes";
-        axios.post(REQUEST_URL,body)
-            .then((response) => {
-                resolve(response.data)
-            }).catch((err) => {
-                reject(null);
-            })
-    });
-};
-export const addProduct = ({body=null}) => {
-    return new Promise((resolve, reject) => {
-        let REQUEST_URL = "http://goturapp.herokuapp.com/product/add";
-        axios.post(REQUEST_URL,body)
+        let REQUEST_URL = "http://smart-lock-server.herokuapp.com/door/getAllDoor";
+        axios.get(REQUEST_URL)
             .then((response) => {
                 resolve(response.data)
             }).catch((err) => {
@@ -46,11 +24,10 @@ export const addProduct = ({body=null}) => {
     });
 };
 
-
-export const deleteProduct = ({body=null}) => {
+export const getLogByDoorId = ({ body = null }) => {
     return new Promise((resolve, reject) => {
-        let REQUEST_URL = "http://goturapp.herokuapp.com/product/remove/" + body._id;
-        axios.delete(REQUEST_URL,body)
+        let REQUEST_URL = "http://smart-lock-server.herokuapp.com/log/getLogByDoorId";
+        axios.post(REQUEST_URL, body)
             .then((response) => {
                 resolve(response.data)
             }).catch((err) => {
@@ -58,4 +35,5 @@ export const deleteProduct = ({body=null}) => {
             })
     });
 };
+
 
