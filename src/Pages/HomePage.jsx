@@ -72,7 +72,7 @@ const HomePage = () => {
 
       <div className="Content">
         <div className="SubContent">
-          <Grid container component="main">
+          <Grid container component="main" className={classes.root}>
             {/* <AlertModal openAlert={values.showAlert} closePopUp={handleClose} alertInfo={values.alertInfo} /> */}
             <CssBaseline />
 
