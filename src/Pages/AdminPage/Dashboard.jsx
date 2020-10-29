@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { fade, makeStyles } from '@material-ui/core/styles';
+import { fade, makeStyles,withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -16,14 +16,12 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
+import TextField from "@material-ui/core/TextField";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 import Orders from './Orders';
-import { Search } from '../../components/searchbar/Searchbar';
 import { Global } from '../../Global';
 
 function Copyright() {
@@ -124,21 +122,12 @@ const useStyles = makeStyles((theme) => ({
     color: Global.color.grey,
   },
   fixedHeight: {
-    height: 240,
-  }, search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
+    height: 150,
+  }, 
+  search: {
     marginRight: theme.spacing(2),
     marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(3),
-      width: 'auto',
-    },
+    width: '20%',
   },
   searchIcon: {
     padding: theme.spacing(0, 2),
@@ -164,8 +153,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 export default function Dashboard() {
   const classes = useStyles();
+  const [values, setValues] = React.useState({
+    doorName: "",
+  });
   const [open, setOpen] = React.useState(true);
 
   const handleDrawerOpen = () => {
@@ -174,8 +167,12 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setValues({ ...values, [name]: value });
+
+  };
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -220,23 +217,6 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container>
-            {/* Chart */}
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-            {/* <Search /> */}
-            {/* Recent Deposits */}
-            {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />

@@ -24,8 +24,7 @@ const useStyles = makeStyles(theme => ({
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing(2, 4, 3),
 		overflowY:'scroll',
-		scrollbarColor: 'dark',
-		scrollBarArrowColor:Global.color.backgrond
+		scrollbarColor: 'green',
 	},
 	alertButton: {
 		backgroundColor: '#5D3DBD',

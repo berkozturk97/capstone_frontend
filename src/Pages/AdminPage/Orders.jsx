@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
-import { getAllDoor, getLog } from '../../API/api';
+import { getAllDoor } from '../../API/api';
 import { Global } from '../../Global';
 import LogDetailModal from '../../components/logdetailmodal/LogDetailModal';
+import { Search } from '../../components/searchbar/Searchbar';
 
 // Generate Order Data
 function createData(index, name, paymentMethod, seeMore) {
@@ -24,14 +24,22 @@ const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
+  search: {
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '20%',
+  },
 }));
 
 
 
 export default function Orders() {
   const [rows, setRows] = useState([]);
+  const [unFilteredRows, setUnFilteredRows] = useState([]);
   const [popUp, setPopUp] = useState(false);
   const [selectedItem, setSelectedItem] = useState([]);
+  const [doorName, setDoorName] = React.useState('');
+
   useEffect(() => {
     getLogsToPanel();
   }, [])
@@ -49,7 +57,21 @@ export default function Orders() {
       });
     }
     setRows(deneme);
+    setUnFilteredRows(deneme)
   }
+
+  function preventDefault(event) {
+    event.preventDefault();
+  }
+  const handleInputChange = (e) => {
+    console.log(rows)
+    const filtered = unFilteredRows.filter(element => {
+      return element.name.toLowerCase().includes(e.toLowerCase())
+    })
+    setDoorName(e);
+    setRows(filtered)
+  };
+
   const seeMore = (doorId) => {
     return (
       <div onClick={() => {
@@ -68,6 +90,11 @@ export default function Orders() {
         openAlert={popUp}
         closePopUp={() => setPopUp(false)}
         selectedItem={selectedItem} />
+
+      <Search
+        value={doorName}
+        onChange={handleInputChange} />
+
       <Title style={{ color: Global.color.backgrond }}>Recent Orders</Title>
       <Table size="small">
         <TableHead>
@@ -92,7 +119,7 @@ export default function Orders() {
           })}
         </TableBody>
       </Table>
-      <div className={classes.seeMore}/>
+      <div className={classes.seeMore} />
     </React.Fragment>
   );
 }
