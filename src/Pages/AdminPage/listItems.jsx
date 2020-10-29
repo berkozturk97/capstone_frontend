@@ -23,31 +23,11 @@ export const mainListItems = (
     <Divider />
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon style={{color:Global.color.green}}/>
-      </ListItemIcon >
-      <ListItemText primary="Orders" style={{color:Global.color.grey}} />
-    </ListItem>
-    <Divider />
-    <ListItem button>
-      <ListItemIcon>
         <PeopleIcon style={{color:Global.color.green}} />
       </ListItemIcon>
       <ListItemText primary="Customers" style={{color:Global.color.grey}} />
     </ListItem>
-    <Divider />
-    <ListItem button>
-      <ListItemIcon>
-        <BarChartIcon style={{color:Global.color.green}} />
-      </ListItemIcon >
-      <ListItemText primary="Reports" style={{color:Global.color.grey}} />
-    </ListItem>
-    <Divider />
-    <ListItem button>
-      <ListItemIcon>
-        <LayersIcon style={{color:Global.color.green}} />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" style={{color:Global.color.grey}} />
-    </ListItem>
+
   </div>
 );
 

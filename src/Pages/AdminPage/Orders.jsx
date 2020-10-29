@@ -12,8 +12,8 @@ import { Global } from '../../Global';
 import LogDetailModal from '../../components/logdetailmodal/LogDetailModal';
 
 // Generate Order Data
-function createData(index, name, shipTo, paymentMethod, seeMore) {
-  return { index, name, shipTo, paymentMethod, seeMore };
+function createData(index, name, paymentMethod, seeMore) {
+  return { index, name, paymentMethod, seeMore };
 }
 
 function preventDefault(event) {
@@ -45,7 +45,7 @@ export default function Orders() {
       responseData.map((item, index) => {
         let date = new Date(item.createdAt)
         deneme.push(createData(index, item.doorName,
-          item.doorId, item._id, seeMore(item._id)));
+          item._id, seeMore(item._id)));
       });
     }
     setRows(deneme);
@@ -57,7 +57,7 @@ export default function Orders() {
         setPopUp(true)
         console.log("selectedItem" + doorId)
       }}>
-        <a style={{ color: '#3949AB', textDecoration: "underline", cursor: 'pointer' }}>See Detail</a>
+        <a style={{ color: '#208AAE', cursor: 'pointer' }}>See Detail</a>
       </div>
     )
   }
@@ -68,13 +68,12 @@ export default function Orders() {
         openAlert={popUp}
         closePopUp={() => setPopUp(false)}
         selectedItem={selectedItem} />
-      <Title>Recent Orders</Title>
+      <Title style={{ color: Global.color.backgrond }}>Recent Orders</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell style={{ color: Global.color.grey }}>Number</TableCell>
             <TableCell style={{ color: Global.color.grey }}>Name</TableCell>
-            <TableCell style={{ color: Global.color.grey }}>Door Code</TableCell>
             <TableCell style={{ color: Global.color.grey }}>Door Id</TableCell>
             <TableCell style={{ color: Global.color.grey }} align="right">Detail</TableCell>
           </TableRow>
@@ -84,9 +83,8 @@ export default function Orders() {
             console.log(row.amount)
             return (
               <TableRow key={row.date}>
-                <TableCell style={{ color: Global.color.white }}>{row.index + 1}</TableCell>
+                <TableCell style={{ color: Global.color.blue }}>{row.index + 1}</TableCell>
                 <TableCell style={{ color: Global.color.white }}>{row.name}</TableCell>
-                <TableCell style={{ color: Global.color.white }}>{row.shipTo}</TableCell>
                 <TableCell style={{ color: Global.color.white }}>{row.paymentMethod}</TableCell>
                 <TableCell align="right">{row.seeMore}</TableCell>
               </TableRow>

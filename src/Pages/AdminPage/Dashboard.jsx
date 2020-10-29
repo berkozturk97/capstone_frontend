@@ -190,7 +190,7 @@ export default function Dashboard() {
           >
             <MenuIcon style={{ color: Global.color.white }} />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography component="h1" variant="h6" color="inherit" noWrap style={{ color: Global.color.green }} className={classes.title}>
             Dashboard
           </Typography>
           <IconButton color="inherit">

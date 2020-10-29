@@ -5,7 +5,8 @@ export const Global = {
         grey:"#b3b3b3",
         green:"#1db954",
         white:"#FFFFFF",
-        red:"#FF4C33"
+        red:"#FF4C33",
+        blue:"#208AAE",
     }
 };
 //3C6E71
