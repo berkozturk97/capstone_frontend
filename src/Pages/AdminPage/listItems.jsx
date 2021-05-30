@@ -18,14 +18,18 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon style={{color:Global.color.green}} />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" style={{color:Global.color.grey}} />
+      <ListItemText  >
+        <a style={{color:Global.color.grey, textDecoration: 'none'}} href="/admin">Dashboard</a>
+      </ListItemText>
     </ListItem>
     <Divider />
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon style={{color:Global.color.green}} />
       </ListItemIcon>
-      <ListItemText primary="Customers" style={{color:Global.color.grey}} />
+      <ListItemText style={{color:Global.color.grey}}>
+        <a style={{color:Global.color.grey, textDecoration: 'none'}} href="/users">Users</a>
+      </ListItemText>
     </ListItem>
 
   </div>

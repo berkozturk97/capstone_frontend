@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import "./HomePage.css";
+import { useHistory } from "react-router";
 
 function Copyright() {
   return (
@@ -47,6 +48,7 @@ const CssTextField = withStyles({
 
 const HomePage = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [values, setValues] = React.useState({
     password: "",
     email: "",
@@ -63,6 +65,13 @@ const HomePage = () => {
       showAlert: false,
     });
   };
+  const login = () => {
+    if(values.email === 'berk1ozturk1@gmail.com' && values.password === '123456') {
+        history.push('/admin');
+    } else {
+      alert('Wrong password or email');
+    }
+  }
   return (
     <div className="Container">
       <video autoPlay="autoplay" loop="loop" muted className="Video">
@@ -128,7 +137,7 @@ const HomePage = () => {
                   autoComplete="current-password"
                 />
                 <Button
-                  onClick
+                  onClick={login}
                   //type="submit"
                   fullWidth
                   variant="contained"

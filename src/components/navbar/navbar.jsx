@@ -14,13 +14,13 @@ const NavigationBar = () => {
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className="mr-auto">
+        {/* <Nav className="mr-auto">
           <Nav.Item style={{marginLeft: '20px'}}>
             <Link style={{ textDecoration: "none" }} to="/admin">
               <span className="pages" style={{color:Global.color.white}}>Admin</span>
             </Link>
           </Nav.Item>
-        </Nav>
+        </Nav> */}
       </Navbar.Collapse>
     </Navbar>
   );

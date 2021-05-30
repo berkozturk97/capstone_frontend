@@ -39,6 +39,7 @@ export default function Orders() {
   const [popUp, setPopUp] = useState(false);
   const [selectedItem, setSelectedItem] = useState([]);
   const [doorName, setDoorName] = React.useState('');
+  const [doors, setDoors] = useState([])
 
   useEffect(() => {
     getLogsToPanel();
@@ -48,6 +49,7 @@ export default function Orders() {
   const getLogsToPanel = async () => {
     let deneme = [];
     let responseData = await getAllDoor();
+    setDoors(responseData);
     if (responseData !== null) {
       console.log(responseData)
       responseData.map((item, index) => {
@@ -89,13 +91,14 @@ export default function Orders() {
       <LogDetailModal
         openAlert={popUp}
         closePopUp={() => setPopUp(false)}
+        doors={doors}
         selectedItem={selectedItem} />
 
       <Search
         value={doorName}
         onChange={handleInputChange} />
 
-      <Title style={{ color: Global.color.backgrond }}>Recent Orders</Title>
+      <Title style={{ color: Global.color.backgrond }}>Doors</Title>
       <Table size="small">
         <TableHead>
           <TableRow>

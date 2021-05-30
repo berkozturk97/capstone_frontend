@@ -7,6 +7,7 @@ import NavigationBar from './components/navbar/navbar.jsx';
 import HomePage from './Pages/HomePage';
 import { createBrowserHistory } from 'history';
 import Dashboard from './Pages/AdminPage/Dashboard';
+import Users from './Pages/AdminPage/User';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route path='/' exact component={HomePage} />
         <Route path='/admin' exact component={Dashboard} />
+        <Route path='/users' exact component={Users} />
       </Switch>
     </div>
   </Router>

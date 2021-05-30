@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function createData(id, fullName, rfid, doorName, isOpen) {
-	return { id, fullName, rfid, doorName, isOpen };
+function createData(id, fullName, rfid, doorName, isOpen, authDoors) {
+	return { id, fullName, rfid, doorName, isOpen, authDoors };
 }
 
 export default function LogDetailModal(props) {
@@ -60,13 +60,30 @@ export default function LogDetailModal(props) {
 			responseData.map((item) => {
 				let date = new Date(item.createdAt)
 				deneme.push(createData(date.toLocaleString(), item.user.fullName,
-					item.rfid, item.doorId.doorName, item.isOpen.toString()));
+					item.rfid, item.doorId.doorName, item.isOpen.toString(), renderDoors(item.user)));
 			});
 		}
 		console.log(responseData)
 		setRows(deneme);
 		setIsVisible(true)
 	}
+
+	const renderDoors = (user) => {
+		const doorGroups = groupByDoorId();
+		return (user.permissions || []).map((door) => {
+		  return doorGroups[door] && (doorGroups[door].doorName + ", " || "");
+		});
+	  };
+	
+	  const groupByDoorId = () => {
+		const lookup = {};
+	
+		(props.doors || []).forEach((door) => {
+		  lookup[door._id] = door;
+		});
+	
+		return lookup;
+	  };
 
 
 	const renderTable = () => {
@@ -75,16 +92,17 @@ export default function LogDetailModal(props) {
 				<div className={classes.paperModal}>
 					<div className={classes.paper} style={{ marginTop: 0 }}>
 						<ErrorIcon style={{ alignSelf: 'center', marginTop: 0, fontSize: 60, marginBottom: 20, color: '#1db954' }} />
-						<h2 id="server-modal-title" className={classes.paper} style={{ marginTop: 0 }}>List of Enterence</h2>
+						<h2 id="server-modal-title" className={classes.paper} style={{ marginTop: 0 }}>List of Entrance</h2>
 						<React.Fragment>
 							<Table size="small">
 								<TableHead>
 									<TableRow>
 										<TableCell style={{ color: Global.color.grey }}>Date</TableCell>
 										<TableCell style={{ color: Global.color.grey }}>Name</TableCell>
-										<TableCell style={{ color: Global.color.grey }}>RFID</TableCell>
-										<TableCell style={{ color: Global.color.grey }}>Door Name</TableCell>
-										<TableCell style={{ color: Global.color.grey }} align="right">Enterence</TableCell>
+										{/* <TableCell style={{ color: Global.color.grey }}>RFID</TableCell> */}
+										<TableCell style={{ color: Global.color.grey }}>Entered Door</TableCell>
+										<TableCell style={{ color: Global.color.grey }}>Authorized Doors</TableCell>
+										{/* <TableCell style={{ color: Global.color.grey }} align="right">Enterence</TableCell> */}
 									</TableRow>
 								</TableHead>
 								<TableBody>
@@ -93,9 +111,9 @@ export default function LogDetailModal(props) {
 											<TableRow key={row.date}>
 												<TableCell style={{ color: Global.color.white }}>{row.id}</TableCell>
 												<TableCell style={{ color: Global.color.white }}>{row.fullName}</TableCell>
-												<TableCell style={{ color: Global.color.white }}>{row.rfid}</TableCell>
+												{/* <TableCell style={{ color: Global.color.white }}>{row.rfid}</TableCell> */}
 												<TableCell style={{ color: Global.color.white }}>{row.doorName}</TableCell>
-												<TableCell style={{ color: row.isOpen === "true" ? Global.color.green : Global.color.red }} align="right">{row.isOpen}</TableCell>
+												<TableCell style={{ color: Global.color.white }}>{row.authDoors}</TableCell>
 											</TableRow>
 										)
 									})}
